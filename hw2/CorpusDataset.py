@@ -3,9 +3,6 @@ __author__ = 'Steffen'
 from fuel.datasets import Dataset
 from nltk.corpus import brown
 from nltk.probability import FreqDist
-import numpy as np
-
-from theano import tensor
 
 
 class CorpusDataset(Dataset):
@@ -26,6 +23,7 @@ class CorpusDataset(Dataset):
         self.word_freq = FreqDist(brown.words())
         self.words = [word for word in brown.words() if self.word_freq[word] > 5]
         self.num_examples = len(self.words)
+        self.get_data(request=range(self.num_examples))
 
     def get_word_val(self, idx):
         if idx < 0:

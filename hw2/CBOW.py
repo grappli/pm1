@@ -21,10 +21,10 @@ from blocks.main_loop import MainLoop
 from fuel.streams import DataStream
 from fuel.schemes import SequentialScheme
 
-num_words = 1
+num_words = 2
 dataset = CorpusDataset(num_words)
 
-hidden_size = 100
+hidden_size = 50
 
 x = tensor.imatrix('features')
 y = tensor.ivector('targets')
@@ -61,7 +61,7 @@ main = MainLoop(
     data_stream=train_stream,
     algorithm=algorithm,
     extensions=[
-        FinishAfter(after_n_epochs=5),
+        FinishAfter(after_n_epochs=10),
         Printing(),
         TrainingDataMonitoring([cost], after_batch=True, prefix='train'),
         SaveWeights([input_to_hidden], ['proj'])
