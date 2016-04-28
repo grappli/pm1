@@ -16,4 +16,4 @@ filename = 'proj_10.npy'
 dataset = CorpusDataset(0)
 
 vec = np.load('C:\Users\Steffen\PycharmProjects\pm1\hw2\proj_10.npy')
-print find_closest_word(vec[dataset.word_dict['Berlin']] - vec[dataset.word_dict['nice']] + vec[dataset.word_dict['elephant']], vec)
+print find_closest_word(vec[dataset.word_dict['Paris']] - vec[dataset.word_dict['interesting']] + vec[dataset.word_dict['elephant']], vec)
