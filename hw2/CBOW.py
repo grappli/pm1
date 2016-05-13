@@ -24,7 +24,7 @@ from fuel.schemes import SequentialScheme
 num_words = 2
 dataset = CorpusDataset(num_words)
 
-hidden_size = 50
+hidden_size = 200
 
 x = tensor.imatrix('features')
 y = tensor.ivector('targets')
@@ -47,6 +47,11 @@ hidden_to_output.initialize()
 cost = CategoricalCrossEntropy().apply(y, y_hat)
 
 cg = ComputationGraph(cost)
+
+W1, W2 = VariableFilter(roles=[WEIGHT])(cg.variables)
+cost = cost + 0.005 * (abs(W1)).sum() + 0.005 * (abs(W2)).sum()
+cost.name = 'cost'
+
 
 algorithm = GradientDescent(cost=cost,
                             parameters=cg.parameters,
