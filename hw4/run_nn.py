@@ -7,7 +7,7 @@ mat_path = 'imagenet-vgg-verydeep-16.mat'
 hdf5_path = '/projects/korpora/mscoco/coco.hdf5'
 
 inet_model = ImagenetModel(mat_path)
-data = h5py.File(hdf5_path)
+data = h5py.File(hdf5_path, 'r')
 
 x = tensor.tensor4('input', dtype='float32')
 
@@ -18,4 +18,7 @@ for layer in inet_model.layers:
 
 func = theano.function([x], y_hat, allow_input_downcast=True)
 
-output = func(data)
+
+output = func(data["images"])
+
+print output
